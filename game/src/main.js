@@ -331,34 +331,48 @@ function stageShot(name) {
     return guard;
   };
   if (name === 'nearmiss') {
-    loadLevel(1);
-    state.player.x = 830; state.player.y = 392;
-    guardAt(0, 1010, 385, Math.PI, { meter: 0.82, state: 'suspicious' });
-    guardAt(1, 300, 640, 0, {});
-    state.time = 64;
+    // Vault 4, the Archive: the thief frozen in the centre lamp pool at the very edge of
+    // the vertical guard's cone, the meter nearly full — a second guard crosses the
+    // horizontal corridor behind him, a third works the far chamber. Five lamp pools,
+    // three chambers, no dark quadrant.
+    loadLevel(3);
+    state.notesOn = true;
+    state.player.x = 640; state.player.y = 455;
+    state.player.angle = -Math.PI / 2;
+    guardAt(1, 640, 255, Math.PI / 2, { meter: 0.82, state: 'suspicious' });
+    guardAt(0, 235, 360, 0, {});
+    guardAt(2, 1080, 315, Math.PI / 2, {});
+    state.time = 73;
   } else if (name === 'coin') {
-    loadLevel(2);
-    state.player.x = 550; state.player.y = 470;
+    // Vault 2, the Gallery: a coin ticking in the crossing lamp pool pulls the corridor
+    // guard off his line and through the doorway, cone and all, while the second guard's
+    // cone pours down the vertical gallery. The thief watches from the north-east grass.
+    loadLevel(1);
+    state.notesOn = true;
+    state.player.x = 1160; state.player.y = 285;
     state.player.sneaking = true;
     state.player.hiddenTag = true;
-    state.coins.push({ x0: 300, y0: 470, x: 300, y: 470, tx: 300, ty: 470, t: 1, h: 0, landed: true });
+    state.player.angle = Math.PI;
+    state.coins.push({ x0: 700, y0: 398, x: 700, y: 398, tx: 700, ty: 398, t: 1, h: 0, landed: true });
     state.coinsLeft = 2;
-    guardAt(0, 430, 430, Math.atan2(470 - 430, 300 - 430), { state: 'investigate', bubbleT: 1.8, bubbleText: 'What was that?', target: { x: 300, y: 470 } });
-    guardAt(1, 900, 110, Math.PI, {});
-    state.time = 41;
+    guardAt(0, 545, 398, Math.atan2(398 - 398, 700 - 545), { state: 'investigate', bubbleT: 1.8, bubbleText: 'What was that?', target: { x: 700, y: 398 } });
+    guardAt(1, 640, 150, Math.PI / 2, {});
+    state.time = 47;
   } else if (name === 'star') {
-    loadLevel(4);
-    state.hasStar = true;
-    state.player.x = 1080; state.player.y = 690;
-    state.player.angle = 0.5;
-    state.player.noiseR = 115;
-    state.lootTaken = 2;
-    state.loot[0].taken = true;
-    state.loot[2].taken = true;
-    guardAt(2, 940, 300, Math.PI / 2, { meter: 0.45, state: 'suspicious' });
-    guardAt(1, 760, 290, 0, {});
-    guardAt(0, 300, 290, Math.PI, {});
-    state.time = 97;
+    // Vault 6, the Star Vault: the grab itself — the thief at the Star in its own lamp
+    // pool while both door guards turn in on him, their cones crossing the chamber; the
+    // top and south patrols close the frame. Six lamp pools around one lit centre.
+    loadLevel(5);
+    state.notesOn = true;
+    state.player.x = 655; state.player.y = 392;
+    state.player.angle = Math.PI;
+    state.lootTaken = 1;
+    state.loot[1].taken = true;
+    guardAt(0, 505, 395, 0, { meter: 0.55, state: 'suspicious' });
+    guardAt(1, 775, 395, Math.PI, { meter: 0.38, state: 'suspicious' });
+    guardAt(2, 520, 600, 0, {});
+    guardAt(3, 860, 110, Math.PI, {});
+    state.time = 112;
   } else {
     // cover: Vault 3, the Counting House — the thief in the chamber wall's blind spot while
     // the Star guard's cone pours through the door and stops at the wall, a second guard off
